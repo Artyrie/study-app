@@ -1,24 +1,35 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+
+function Movie(props) {
+  return <div className="MovieCom">
+    <h2>Movie name : {props.name}</h2>
+  <img src={props.img} width="500px"></img>
+  </div>
+}
+
+const Moviename = [
+  {
+    name: "flower",
+    image: "https://i.imgur.com/XroHcwe.jpg"
+  },
+  {
+    name: "dark nebula",
+    image: "https://i.imgur.com/fMGVpco.jpg"
+  },
+  {
+    name: "Crystalized amino",
+    image: "https://i.imgur.com/yRlkwEc.jpg"
+  }
+]
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Movie List</h1>
+      {Moviename.map(current =>
+      <Movie name={current.name} img={current.image}></Movie>
+      )}
+      {/* current is each items.*/}
     </div>
   );
 }
