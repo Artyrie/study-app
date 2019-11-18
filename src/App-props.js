@@ -1,5 +1,4 @@
-import React from 'react';
-import { createSecureContext } from 'tls';
+import React from 'react';;
 import PropTypes from 'prop-types';
 
 function Movie({name, image, rating}) {
