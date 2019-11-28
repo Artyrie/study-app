@@ -2,8 +2,7 @@ import React from 'react';
 import './MovieSelector.css';
 
 import SelectMovie from './SelectMovie';
-//import { MovieSet } from './SampleSet';
-
+import { MovieSet } from './SampleSet';
 import axios from 'axios';
 
 class MovieSelector extends React.Component {
@@ -13,9 +12,7 @@ class MovieSelector extends React.Component {
         this.state = {
             Selected : [],
             tmpSelected : [],
-            modal: false,
-            movies: [],
-            isLoading: true
+            modal: false
         };
 
         this.moveSelectMovie = this.moveSelectMovie.bind(this);
@@ -24,21 +21,6 @@ class MovieSelector extends React.Component {
         this.chooseMovie = this.chooseMovie.bind(this);
         this.confirmMovie = this.confirmMovie.bind(this);
         this.cancelMovie = this.cancelMovie.bind(this);
-
-        this.state.movies = [];
-    }
-
-    getMovie = async() => {
-        const {
-            data: {
-                data: { movies }
-            }
-        } = await axios.get("https://yts.lt/api/v2/list_movies.json?limit=30&sort_by=year&Director Name=Jennifer Michelle Lee&genre=Animation");
-        this.setState({movies: movies, isLoading: false});
-    }
-
-    componentDidMount() {
-        this.getMovie();
     }
 
     moveSelectMovie() {
@@ -103,22 +85,17 @@ class MovieSelector extends React.Component {
     }
 
     makingSelectedMovie(current) {
-        var i = 0;
-        for (i; i<this.state.movies.length; i++) {
-            if (this.state.movies[i].id === current) {
-                break;
-            }
-        }
+        var index = 10 * (current.Row - 1) + current.Col - 1;
         return (
             <div key={current} className="ConfirmImg">
-            <button onClick={this.cancelMovie.bind(this, current)}>X</button>
-            <img src={this.state.movies[i].medium_cover_image} alt={this.state.movies[i].title} width="95px" height="140px" ></img>
+            <button onClick={this.cancelMovie.bind(this, index)}>X</button>
+            <img src={MovieSet[current-1].img} alt={MovieSet[current-1].name} width="95px" height="140px" ></img>
             </div>
         );
     }
 
     renderSelectedMovie() {
-        if (this.state.isLoading === true) {
+        if (this.state.Selected.length === 0) {
             return (
                 <div className="MovieSelector">
                     <div className="MovieSelNav">
@@ -127,48 +104,31 @@ class MovieSelector extends React.Component {
                     </div>
                     <div className="MovieSelContent">
                         <div className="SelectedMovie">
-                            <h1>Now Loading...</h1>
+                            <h1>모든영화</h1>
                         </div>
-                        <button id="MoveSelectMovie">Loading...</button>
+                        <button id="MoveSelectMovie"
+                        onClick={this.moveSelectMovie.bind(this)}>영화선택 > </button>
                     </div>
                 </div>
             );
         } else {
-            if (this.state.Selected.length === 0) {
-                return (
-                    <div className="MovieSelector">
-                        <div className="MovieSelNav">
-                            <h2>영화</h2>
-                            <button onClick={this.selectAllMovie}></button>
+            return (
+                <div className="MovieSelector">
+                    <div className="MovieSelNav">
+                        <h2>영화</h2>
+                        <button onClick={this.selectAllMovie}></button>
+                    </div>
+                    <div className="MovieSelContent">
+                        <div className="ConfirmedMovie">
+                            {this.state.Selected.map(current => {
+                                return (this.makingSelectedMovie(current));
+                            })}
                         </div>
-                        <div className="MovieSelContent">
-                            <div className="SelectedMovie">
-                                <h1>모든영화</h1>
-                            </div>
-                            <button id="MoveSelectMovie"
+                        <button id="MoveSelectMovie"
                             onClick={this.moveSelectMovie.bind(this)}>영화선택 > </button>
-                        </div>
                     </div>
-                );
-            } else {
-                return (
-                    <div className="MovieSelector">
-                        <div className="MovieSelNav">
-                            <h2>영화</h2>
-                            <button onClick={this.selectAllMovie}></button>
-                        </div>
-                        <div className="MovieSelContent">
-                            <div className="ConfirmedMovie">
-                                {this.state.Selected.map(current => {
-                                    return (this.makingSelectedMovie(current));
-                                })}
-                            </div>
-                            <button id="MoveSelectMovie"
-                                onClick={this.moveSelectMovie.bind(this)}>영화선택 > </button>
-                        </div>
-                    </div>
-                );
-            }
+                </div>
+            );
         }
     }
 

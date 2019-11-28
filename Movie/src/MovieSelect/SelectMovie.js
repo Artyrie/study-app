@@ -1,8 +1,7 @@
 import React from 'react';
 import './SelectMovie.css';
 import PropTypes from 'prop-types';
-//import { MovieSet } from './SampleSet';
-import axios from 'axios';
+import { MovieSet } from './SampleSet';
 
 class SelectMovie extends React.Component {
     constructor(props) {
@@ -13,21 +12,6 @@ class SelectMovie extends React.Component {
         this.chooseMovie = this.props.onChooseMovie.bind(this);
         this.confirmMovie = this.props.onConfirmMovie.bind(this);
         this.tmpSelected = this.props.tmpSelected;
-
-        this.movies = [];
-    }
-
-    getMovie = async() => {
-        const {
-            data: {
-                data: { movies }
-            }
-        } = await axios.get("https://yts.lt/api/v2/list_movies.json?limit=20&sort_by=year&Director Name=Jennifer Michelle Lee&genre=Animation");
-        this.movies = movies;
-    }
-
-    componentDidMount() {
-        this.getMovie();
     }
 
     cancelSelectMovie() {
@@ -47,21 +31,21 @@ class SelectMovie extends React.Component {
     }
 
     renderMovieSet(current) {
-        if (this.tmpSelected.includes(current.id)) {
+        if (this.tmpSelected.includes(current.index)) {
             return (
-                <div className="SelectMovSet" key={current.id}>
-                    <button onClick={this.chooseMovie.bind(this, current.id)} id="AlreadyMov">
-                    <img src={current.medium_cover_image} alt={current.title} width="130px" height="190px" ></img>
-                    <p><span className={'SelMov' + current.age}>{current.age}</span>{current.title.slice(0,20)}...</p>
+                <div className="SelectMovSet" key={current.index}>
+                    <button onClick={this.chooseMovie.bind(this, current.index)} id="AlreadyMov">
+                    <img src={current.img} alt={current.name} width="130px" height="190px" ></img>
+                    <p><span className={'SelMov' + current.age}>{current.age}</span>{current.name}</p>
                     </button>
                 </div>
             );
         } else {
             return (
-                <div className="SelectMovSet" key={current.id}>
-                    <button onClick={this.chooseMovie.bind(this, current.id)}>
-                    <img src={current.medium_cover_image} alt={current.title} width="130px" height="190px" ></img>
-                    <p><span className={'SelMov' + current.age}>{current.age}</span>{current.title.slice(0,20)}...</p>
+                <div className="SelectMovSet" key={current.index}>
+                    <button onClick={this.chooseMovie.bind(this, current.index)}>
+                    <img src={current.img} alt={current.name} width="130px" height="190px" ></img>
+                    <p><span className={'SelMov' + current.age}>{current.age}</span>{current.name}</p>
                     </button>
                 </div>
             );
@@ -78,7 +62,7 @@ class SelectMovie extends React.Component {
                 </div>
                 <div><button id="SelMovAll" onClick={this.selectAll}>All</button></div>
                 <div className="SelectMovContent">
-                    {this.movies.map(current => {
+                    {MovieSet.map(current => {
                         return (this.renderMovieSet(current))
                     })}
                 </div>
