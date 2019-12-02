@@ -10,17 +10,13 @@ class SelectTheater extends React.Component {
         this.cancelSelectTheater = this.props.onCancelSelectTheater.bind(this);
         this.confirmTheater = this.props.onConfirmTheater.bind(this);
         this.chooseTheater = this.props.onChooseTheater.bind(this);
-        
-        this.tmpSelected = this.props.tmpSelected;
-        /*
-        this.showDropdown = this.showDropdown.bind(this);
+        this.showDropdown =this.props.onShowDropdown.bind(this);
+        this.state = {
+            dropdown: 'initial',
+            tmpSelected: []
+        }
 
         this.region = [];
-        
-        this.state = {
-            showing: false
-        };
-        */
     }
 
     cancelSelectTheaterr() {
@@ -31,12 +27,19 @@ class SelectTheater extends React.Component {
         this.props.onCancelSelectTheater();
     }
 
-    
-    chooseTheater(index) {
-        this.props.onChooseTheater(index);
+    showDropdown(name) {
+        this.props.onShowDropdown(name);
     }
 
-    /*
+    componentDidMount() {
+        this.splitRegion();
+        this.showDropdown(this.region[0]);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({dropdown: nextProps.Dropdown, tmpSelected: nextProps.tmpSelected });
+    }
+    
     splitRegion() {
         for(var i=0; i<Theaterinfo.length; i++) {
             var tmp = Theaterinfo[i]
@@ -46,59 +49,49 @@ class SelectTheater extends React.Component {
         }
     }
 
-    showDropdown() {
-        if ( this.state.showing === false ) {
-            this.setState({showing: true});
-        } else {
-            this.setState({showing: false});
-        }
-    }
-
-    renderRegion(current) {
+    subregionArray(name) {;
         var arr = [];
         for (var i=0; i<Theaterinfo.length; i++) {
-            if ( Theaterinfo[i].region === current) {
+            if ( Theaterinfo[i].region === name) {
                 arr.push(Theaterinfo[i]);
             }
         }
-        return (
-            <div className="MainRegion">
-                <button onClick={this.showDropdown}>{current}</button>
-                <div className="SubRegion" key={Theaterinfo.indexOf(arr[0])}>
-                    {arr.map(subregion => {
-                        return(<button key={subregion.index}
-                            style={{display: this.state.showing ? 'block': 'none'}}>{subregion.name}</button>)
-                    })}
-                </div>
-            </div>
-        )
+        return arr;
     }
-    */
 
-    renderRegion(current) {
-        if (this.tmpSelected.includes(current.index)) {
+    renderDropdown(current) {
+        var i = 0;
+        var top = -(this.region.indexOf(current) * 35);
+        if (current === this.state.dropdown) {
+            var arr = this.subregionArray(current);
             return (
-                <div className="SelectTheSet" key={current.index}>
-                    <button onClick={this.chooseTheater.bind(this, current.index)} id="AlreadyThe">
-                    <p>{current.name}</p>
-                    {current.region}
-                    </button>
-                </div>
-            );
-        } else {
-            return (
-                <div className="SelectTheSet" key={current.index}>
-                    <button onClick={this.chooseTheater.bind(this, current.index)}>
-                    <p>{current.name}</p>
-                    {current.region}
-                    </button>
-                </div>
+                <ul className="SubRegion" style={{top: top+'px'}}>
+                    {arr.map(currents => {
+                        i += 1;
+                        if (this.state.tmpSelected.includes(currents.index)) {
+                            return (<li key={current + i}><button
+                            onClick={this.chooseTheater.bind(this, currents.index)}
+                            style={{backgroundColor: 'rgb(224,224,224)'}}>{currents.name}</button></li>);
+                        } else {
+                            return (<li key={current + i}><button 
+                                onClick={this.chooseTheater.bind(this, currents.index)}>{currents.name}</button></li>);
+                        }
+                    })}
+                </ul>
             );
         }
     }
 
+    renderRegion(current) {
+        return (
+            <li className="Mainregion" key={this.region.indexOf(current)}>
+                <button onClick={this.showDropdown.bind(this, current)}>{current}</button>
+                {this.renderDropdown(current)}
+            </li>
+        )
+    }
+
     render() {
-        /*this.splitRegion();*/
         return (
             <div className="SelectTheater">
                 <div className="SelectTheNav">
@@ -107,15 +100,18 @@ class SelectTheater extends React.Component {
                     <button id="SelThe" onClick={this.confirmTheater}>확인</button>
                 </div>
                 <div className="SelectTheContent">
-                    <div id="Theaterdummy"></div>
-                    {/*
+                    <div id="Theaterdummy">
+                        {this.state.tmpSelected.map(index => {
+                            return (<button onClick={this.chooseTheater.bind(this,index)}
+                                key={index-1}>{Theaterinfo[index-1].name}
+                                <span id="cancelThe">X</span></button>);
+                        })}
+                    </div>
+                    <ul>
                     {this.region.map(current => {
                             return (this.renderRegion(current));
                     })}
-                    */}
-                    {Theaterinfo.map(current => {
-                        return (this.renderRegion(current));
-                    })}
+                    </ul>
                 </div>
             </div>
         )
@@ -124,7 +120,10 @@ class SelectTheater extends React.Component {
 
 SelectTheater.propTypes = {
     onCancelSelectTheater: PropTypes.func.isRequired,
-    onConfirmTheater: PropTypes.func.isRequired
+    onConfirmTheater: PropTypes.func.isRequired,
+    onChooseTheater: PropTypes.func.isRequired,
+    onShowDropdown: PropTypes.func.isRequired,
+    Dropdown: PropTypes.string.isRequired
 };
 
 export default SelectTheater;

@@ -1,24 +1,10 @@
-@media ( min-width: 1860px ) {
-    .SelectTheater {
-        box-shadow: 0 13px 27px -5px rgba(0,0,0,0.75),
-        0 8px 16px -8px rgba(0,0,0,0.3), 0 -6px 16px -6px rgba(0,0,0,0.025);
-        width: 50%;
-        max-width: 925px;
-        min-height: 300px;
-        max-height: 50%;
-        margin: auto;
-    }
-}
 
-@media ( min-width: 1px ) {
-    .SelectTheater {
-        box-shadow: 0 13px 27px -5px rgba(0,0,0,0.75),
-        0 8px 16px -8px rgba(0,0,0,0.3), 0 -6px 16px -6px rgba(0,0,0,0.025);
-        width: 925px;
-        min-height: 300px;
-        max-height: 50%;
-        margin: auto;
-    }
+.SelectTheater {
+    box-shadow: 0 13px 27px -5px rgba(0,0,0,0.75),
+    0 8px 16px -8px rgba(0,0,0,0.3), 0 -6px 16px -6px rgba(0,0,0,0.025);
+    max-width: 925px;
+    height: 550px;
+    margin: auto;
 }
 
 /* SelectTheater Nav */
@@ -76,10 +62,12 @@
 
 /* 컨텐츠 부분 */
 
-.SelectTheContent {
-    overflow-y: scroll;
+.SelectTheContent > ul {
+    padding: 0px;
+    margin: 0px;
 }
 
+/* 백업용 css */
 .SelectTheater .SelectTheContent .SelectTheSet {
     display: inline-block;
     border: solid 1px rgb(224,224,224);
@@ -116,4 +104,90 @@
     padding: 8px;
     margin: 5px;
     margin-top: 0px;
+}
+/* 여기까지 */
+
+#Theaterdummy {
+    border: solid 1px rgb(224,224,224);
+    height: 45px;
+}
+
+#Theaterdummy > button {
+    display: inline-block;
+    margin: 10px;
+    border: solid 1px rgb(224,224,224);
+    background-color: white;
+    border-radius: 5px;
+}
+
+#Theaterdummy > button:hover {
+    cursor: pointer;
+}
+
+#Theaterdummy > button > span {
+    margin-left: 5px;
+    font-weight: bold;
+}
+
+/* Region 선택 드롭다운 */
+
+.Mainregion {
+    margin: 0px;
+    padding-left: 0px;
+    position: relative;
+    top: 0px;
+}
+
+.SelectTheater .SelectTheContent > ul {
+    width: 180px;
+}
+
+.Mainregion li, ul {
+    list-style: none;
+}
+
+.Mainregion button {
+    border: none;
+    width: 180px;
+    height: 35px;
+    margin: 0px;
+    padding: 5px;
+    background-color: white;
+}
+
+.Mainregion > li > button {
+    border: solid 1px rgb(224,224,224);
+}
+
+.Mainregion button:hover {
+    cursor: pointer;
+    background-color: rgb(249,249,249);
+}
+
+.Mainregion button:focus {
+    outline: none;
+    background-color: rgb(249,249,249);
+}
+
+.SubRegion {
+    position: absolute;
+    margin: 0px;
+    padding: 0px;
+    top: 0px;
+    left: 180px;
+    width: 180px;
+    height: 445px;
+    border: solid 1px rgb(224,224,224);
+    background-color: rgb(249,249,249);
+    overflow-y: auto;
+}
+
+.SubRegion button {
+    background-color: rgb(249,249,249);
+    border-top: none;
+    border-bottom: none;
+}
+
+.SubRegion button:hover {
+    background-color: rgb(224,224,224);
 }

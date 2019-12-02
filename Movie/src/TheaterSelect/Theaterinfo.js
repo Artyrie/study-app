@@ -38,6 +38,21 @@ const info = [
         index: 8,
         region: '경기',
         name: '오산'
+    },
+    {
+        index: 9,
+        region: '서울',
+        name: '동대문'
+    },
+    {
+        index: 10,
+        region: '경기',
+        name: '분당'
+    },
+    {
+        index: 11,
+        region: '인천',
+        name: '송도'
     }
 ];
 

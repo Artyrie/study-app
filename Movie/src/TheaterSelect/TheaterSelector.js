@@ -10,7 +10,8 @@ class TheaterSelector extends React.Component {
         this.state = {
             Selected : [],
             tmpSelected : [],
-            modal: false
+            modal: false,
+            dropdown: ''
         };
 
         this.moveSelectTheater = this.moveSelectTheater.bind(this);
@@ -18,6 +19,9 @@ class TheaterSelector extends React.Component {
         this.confirmTheater = this.confirmTheater.bind(this);
         this.chooseTheater = this.chooseTheater.bind(this);
         this.selectAllTheater = this.selectAllTheater.bind(this);
+
+        //
+        this.showDropdown = this.showDropdown.bind(this);
     }
 
     moveSelectTheater() {
@@ -69,6 +73,12 @@ class TheaterSelector extends React.Component {
         } else {
             alert("4개까지 선택 가능합니다.");
         }
+        this.setState(tmp);
+    }
+
+    showDropdown(name) {
+        var tmp = this.state;
+        tmp.dropdown = name;
         this.setState(tmp);
     }
 
@@ -170,7 +180,9 @@ class TheaterSelector extends React.Component {
                     onCancelSelectTheater={this.cancelSelectTheater}
                     onConfirmTheater={this.confirmTheater}
                     tmpSelected={this.state.tmpSelected}
-                    onChooseTheater={this.chooseTheater}></SelectTheater>
+                    onChooseTheater={this.chooseTheater}
+                    onShowDropdown={this.showDropdown}
+                    Dropdown={this.state.dropdown}></SelectTheater>
                 </div>
             </div>
         )

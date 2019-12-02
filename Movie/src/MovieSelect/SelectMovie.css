@@ -1,26 +1,11 @@
 /* 전체 박스 부분 */
 
-@media ( min-width: 1860px ) {
-    .SelectMovie {
-        box-shadow: 0 13px 27px -5px rgba(0,0,0,0.75),
-        0 8px 16px -8px rgba(0,0,0,0.3), 0 -6px 16px -6px rgba(0,0,0,0.025);
-        width: 50%;
-        max-width: 925px;
-        min-height: 300px;
-        max-height: 50%;
-        margin: auto;
-    }
-}
-
-@media ( min-width: 1px ) {
-    .SelectMovie {
-        box-shadow: 0 13px 27px -5px rgba(0,0,0,0.75),
-        0 8px 16px -8px rgba(0,0,0,0.3), 0 -6px 16px -6px rgba(0,0,0,0.025);
-        width: 925px;
-        min-height: 300px;
-        max-height: 50%;
-        margin: auto;
-    }
+.SelectMovie {
+    box-shadow: 0 13px 27px -5px rgba(0,0,0,0.75),
+    0 8px 16px -8px rgba(0,0,0,0.3), 0 -6px 16px -6px rgba(0,0,0,0.025);
+    width: 925px;
+    height: 642px;
+    margin: auto;
 }
 
 
@@ -81,6 +66,8 @@
 
 .SelectMovContent {
     overflow-y: scroll;
+    min-height: 300px;
+    max-height: 540px;
 }
 
 .SelectMovie #SelMovAll {
