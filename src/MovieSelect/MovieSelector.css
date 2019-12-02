@@ -4,6 +4,7 @@
     width: 430px;
     height: 390px;
     border:solid 1px rgb(225,225,225);
+    border-right: none;
     background-color: rgb(249,249,249);
 }
 
@@ -74,7 +75,7 @@
 
 .MovieSelContent .ConfirmedMovie .ConfirmImg {
     display: inline-block;
-    width: 95px;
+    width: 96.5px;
     height: 140px;
     margin-top: -23px;
 }

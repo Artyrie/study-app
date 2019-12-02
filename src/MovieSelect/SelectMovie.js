@@ -22,7 +22,7 @@ class SelectMovie extends React.Component {
             data: {
                 data: { movies }
             }
-        } = await axios.get("https://yts.lt/api/v2/list_movies.json?limit=20&sort_by=year&Director Name=Jennifer Michelle Lee&genre=Animation");
+        } = await axios.get("https://yts.lt/api/v2/list_movies.json?limit=50&sort_by=year&Director Name=Jennifer Michelle Lee&genre=Animation");
         this.movies = movies;
     }
 

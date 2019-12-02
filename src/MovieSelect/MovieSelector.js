@@ -112,7 +112,7 @@ class MovieSelector extends React.Component {
         return (
             <div key={current} className="ConfirmImg">
             <button onClick={this.cancelMovie.bind(this, current)}>X</button>
-            <img src={this.state.movies[i].medium_cover_image} alt={this.state.movies[i].title} width="95px" height="140px" ></img>
+            <img src={this.state.movies[i].medium_cover_image} alt={this.state.movies[i].title} width="97px" height="140px" ></img>
             </div>
         );
     }

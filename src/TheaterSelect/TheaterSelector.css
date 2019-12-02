@@ -3,6 +3,8 @@
     width: 430px;
     height: 240px;
     border:solid 1px rgb(225,225,225);
+    border-bottom: none;
+    border-right: none;
     background-color: rgb(249,249,249);
 }
 

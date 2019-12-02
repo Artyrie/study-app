@@ -1,25 +1,14 @@
 /* TimeSelector 전체 */
 .TimeSelector {
     width: 430px;
-    height: 100px;
-    border:solid 1px rgb(225,225,225);
+    height: 734px;
     background-color: rgb(249,249,249);
 }
 
-
-/* TimeSelector 의 Nav 부분 */
+/* TimeSelector Nav */
 .TimeSelNav {
-    display: flex;
-}
-
-.TimeSelNav button {
-    background-image: url('../MovieSelect/Reset.PNG');
-    width: 25px;
-    height: 25px;
-    padding: 3px;
-    margin: 18px;
-    margin-left: 300px;
-    border-radius: 5px;
+    border-top:solid 1px rgb(225,225,225);
+    height: 100px;
 }
 
 .TimeSelNav h2 {
@@ -27,7 +16,105 @@
     color: rgb(77,53,148);
 }
 
-/* TimeSelector 내용 부분 */
-.TimeSelector .TimeSelContent {
-    display: inline-block;
+/* TimeSlide 부분 */
+.TimeSlide {
+    margin-left: 15px;
+}
+
+.TimeSlide button {
+    background-color: white;
+    border-radius: 5px;
+    height: 25px;
+    line-height: 10px;
+}
+
+.TimeSlide .MoveTime {
+    color: rgb(51,51,51);
+    width: 25px;
+}
+
+.TimeSlide .MoveTime:first-child {
+    padding-left: 3.5px;
+}
+
+.TimeSlide .LocalTime {
+    width: 34px;
+}
+
+/* TimeLine (시간표) 부분 */
+
+.TimeLine {
+    border-top: solid 1px rgb(225,225,225);
+    height: 550px;
+    overflow-y: auto;
+}
+
+.TimeLine .TimeSet { 
+    border:none;
+    border-bottom: solid 1px rgb(225,225,225);
+    background-color: white;
+    height: 60px;
+    display: flex;
+    margin: 0px;
+    padding: 0px;
+}
+
+.TimeLine .TimeSet:hover {
+    cursor: pointer;
+    background-color: rgb(237,237,237);
+}
+
+.TimeLine .TimeSet:focus {
+    outline: none;
+}
+
+.TimeLine .TimeSet span {
+    line-height: 55px;
+    font-size: 25px;
+    font-weight: lighter;
+    color: rgb(225,225,225);
+}
+
+.TimeLine .TimeArea {
+    display: flex;
+    width: 135px;
+    height: 60px;
+    text-align: center;
+}
+
+.TimeLine .TimeArea h3 {
+    margin-left: 15px;
+    line-height: 30px;
+    color: rgb(51,51,51);
+}
+
+.TimeLine .TimeArea p {
+    line-height: 40px;
+    margin-left: 5px;
+    color: rgb(51,51,51);
+}
+
+.TimeLine .TimeName {
+    width: 200px;
+    text-align: center;
+    line-height: 30px;
+    color: rgb(51,51,51);
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.TimeLine .TimeTheater {
+    width: 63px;
+    height: 60px;
+    margin: 0px;
+    font-size: 10px;
+}
+
+.TimeLine .TimeTheater p {
+    margin: 0px;
+    margin-top: 3px;
+}
+
+.TimeLine .TimeTheater p:first-child {
+    margin-top: 8px;
 }
